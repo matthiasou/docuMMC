@@ -7,9 +7,9 @@
  */
 
 class CUtilisateur extends CI_Controller{
+
     public function refresh() {
         $this->load->view('VIndex');
-
     }
 
     public function all(){
@@ -21,10 +21,23 @@ class CUtilisateur extends CI_Controller{
 
 
     public function connexion() {
-        if ($joueur = $this->doctrine->em->createQuery("SELECT u FROM utilisateur u WHERE login='test' AND password ='test'")) {
+        /*if ($joueur = $this->doctrine->em->createQuery("SELECT u FROM utilisateur u WHERE login='test' AND password ='test'")) {
             echo "bien joué";
         }else
-            echo "connard";
+            echo "connard";*/
+
+        $this->load->helper(array('form', 'url'));
+
+        $this->load->library('form_validation');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('');
+        }
+        else
+        {
+            $this->load->view('formsuccess');
+        }
 
         /*$query = $this->doctrine->em->createQuery("SELECT u FROM utilisateur u");
         $users = $query->getResult();
