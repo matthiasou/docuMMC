@@ -15,7 +15,7 @@
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('form'); ?>
+<?php echo form_open('/CUtilisateur/connexion'); ?>
 
 <h5>Login</h5>
 <input type="text" name="username" value="" size="50" />
