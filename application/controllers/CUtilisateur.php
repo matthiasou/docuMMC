@@ -6,7 +6,7 @@
  * Time: 00:56
  */
 
-class CUtilisateur extends CI_Controller{
+class CUtilisateur extends BaseCtrl{
 
     public function refresh() {
         $this->load->view('VIndex');
@@ -16,6 +16,7 @@ class CUtilisateur extends CI_Controller{
         $query = $this->doctrine->em->createQuery("SELECT u FROM utilisateur u");
         $users = $query->getResult();
         $this->load->view('VUtilisateur',array('utilisateurs'=>$users));
+
     }
 
 

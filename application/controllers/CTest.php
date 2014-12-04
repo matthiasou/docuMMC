@@ -6,7 +6,7 @@
  * Time: 20:53
  */
 
-class CTest extends  CI_Controller{
+class CTest extends  BaseCtrl{
 
     public function affiche(){
         echo 'good';
