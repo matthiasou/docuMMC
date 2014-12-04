@@ -8,8 +8,10 @@
 
 class CUtilisateur extends BaseCtrl{
 
-    public function refresh() {
+    public function refresh($pb='') {
         $this->load->view('VIndex');
+        if ($pb == true)
+            echo 'Login ou password incorrect';
     }
 
     public function all(){
@@ -26,13 +28,16 @@ class CUtilisateur extends BaseCtrl{
     {
         $login = $_POST['username'];
         $password = $_POST['password'];
+        $query = $this->doctrine->em->createQuery("SELECT u FROM Utilisateur u WHERE u.login='" . $login . "' AND u.password ='" . $password . "'");
+        if($joueur = $query->getResult()) {
 
-        if($query = $this->doctrine->em->createQuery("SELECT u FROM Utilisateur u WHERE u.login='" . $login . "' AND u.password ='" . $password . "'")) {
-            $joueur = $query->getSingleResult();
-            echo $joueur->getLogin();
+            echo $joueur[0]->getLogin();
+            var_dump($joueur[0]);
         }
-        else
-                echo "chiasse";
+        else{
+            $pb = array('erreur de connexion');
+            $this->refresh($pb);
+        }
         //echo $joueur->getLogin();
 
 
