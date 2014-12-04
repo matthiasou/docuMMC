@@ -17,6 +17,7 @@ class CUtilisateur extends BaseCtrl{
         $users = $query->getResult();
         $this->load->view('VUtilisateur',array('utilisateurs'=>$users));
 
+
     }
 
 

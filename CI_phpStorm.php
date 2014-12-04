@@ -72,6 +72,7 @@
  * @property CI_Jquery $jquery                    Jquery Class
  * @property CI_Utf8 $utf8                        Provides support for UTF-8 environments
  * @property CI_Security $security                Security Class, xss, csrf, etc...
+ * @property CI_JsUtils $jsutils
  */
 class CI_Controller{}
 
@@ -117,5 +118,6 @@ class CI_Controller{}
  * @property CI_Jquery $jquery                    Jquery Class
  * @property CI_Utf8 $utf8                        Provides support for UTF-8 environments
  * @property CI_Security $security                Security Class, xss, csrf, etc...
+ * @property CI_JsUtils $jsutils
  */
 class CI_Model{}
