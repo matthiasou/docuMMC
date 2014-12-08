@@ -2,48 +2,48 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Mapping as ORM;
 
 /**
  * Domaine
  *
- * @ORM\Table(name="domaine")
- * @ORM\Entity
+ * @Table(name="domaine")
+ * @Entity
  */
 class Domaine
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="id", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=50, nullable=true)
+     * @Column(name="libelle", type="string", length=50, nullable=true)
      */
     private $libelle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
+     * @Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var \Monde
      *
-     * @ORM\ManyToOne(targetEntity="Monde")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idMonde", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Monde")
+     * @JoinColumns({
+     *   @JoinColumn(name="monde_id", referencedColumnName="id")
      * })
      */
-    private $idmonde;
+    private $monde;
 
 
     /**
@@ -103,25 +103,25 @@ class Domaine
     }
 
     /**
-     * Set idmonde
+     * Set monde
      *
-     * @param \Monde $idmonde
+     * @param \Monde $monde
      * @return Domaine
      */
-    public function setIdmonde(\Monde $idmonde = null)
+    public function setMonde(\Monde $monde = null)
     {
-        $this->idmonde = $idmonde;
+        $this->monde = $monde;
     
         return $this;
     }
 
     /**
-     * Get idmonde
+     * Get monde
      *
      * @return \Monde 
      */
-    public function getIdmonde()
+    public function getMonde()
     {
-        return $this->idmonde;
+        return $this->monde;
     }
 }

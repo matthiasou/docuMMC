@@ -2,73 +2,73 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Mapping as ORM;
 
 /**
  * Version
  *
- * @ORM\Table(name="version")
- * @ORM\Entity
+ * @Table(name="version")
+ * @Entity
  */
 class Version
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="id", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateMaj", type="datetime", nullable=true)
+     * @Column(name="dateMaj", type="datetime", nullable=true)
      */
     private $datemaj;
 
     /**
      * @var \Document
      *
-     * @ORM\ManyToOne(targetEntity="Document")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idDocument", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Document")
+     * @JoinColumns({
+     *   @JoinColumn(name="document_id", referencedColumnName="id")
      * })
      */
-    private $iddocument;
+    private $document;
 
     /**
      * @var \Utilisateur
      *
-     * @ORM\ManyToOne(targetEntity="Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idAuteur", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Utilisateur")
+     * @JoinColumns({
+     *   @JoinColumn(name="utilisateur_id", referencedColumnName="id")
      * })
      */
-    private $idauteur;
+    private $utilisateur;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Partie", inversedBy="idversion")
-     * @ORM\JoinTable(name="partieversion",
+     * @ManyToMany(targetEntity="Partie", inversedBy="version")
+     * @JoinTable(name="partieversion",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="idVersion", referencedColumnName="id")
+     *     @JoinColumn(name="version_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idPartie", referencedColumnName="id")
+     *     @JoinColumn(name="partie_id", referencedColumnName="id")
      *   }
      * )
      */
-    private $idpartie;
+    private $partie;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idpartie = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->partie = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -105,81 +105,81 @@ class Version
     }
 
     /**
-     * Set iddocument
+     * Set document
      *
-     * @param \Document $iddocument
+     * @param \Document $document
      * @return Version
      */
-    public function setIddocument(\Document $iddocument = null)
+    public function setDocument(\Document $document = null)
     {
-        $this->iddocument = $iddocument;
+        $this->document = $document;
     
         return $this;
     }
 
     /**
-     * Get iddocument
+     * Get document
      *
      * @return \Document 
      */
-    public function getIddocument()
+    public function getDocument()
     {
-        return $this->iddocument;
+        return $this->document;
     }
 
     /**
-     * Set idauteur
+     * Set utilisateur
      *
-     * @param \Utilisateur $idauteur
+     * @param \Utilisateur $utilisateur
      * @return Version
      */
-    public function setIdauteur(\Utilisateur $idauteur = null)
+    public function setUtilisateur(\Utilisateur $utilisateur = null)
     {
-        $this->idauteur = $idauteur;
+        $this->utilisateur = $utilisateur;
     
         return $this;
     }
 
     /**
-     * Get idauteur
+     * Get utilisateur
      *
      * @return \Utilisateur 
      */
-    public function getIdauteur()
+    public function getUtilisateur()
     {
-        return $this->idauteur;
+        return $this->utilisateur;
     }
 
     /**
-     * Add idpartie
+     * Add partie
      *
-     * @param \Partie $idpartie
+     * @param \Partie $partie
      * @return Version
      */
-    public function addIdpartie(\Partie $idpartie)
+    public function addPartie(\Partie $partie)
     {
-        $this->idpartie[] = $idpartie;
+        $this->partie[] = $partie;
     
         return $this;
     }
 
     /**
-     * Remove idpartie
+     * Remove partie
      *
-     * @param \Partie $idpartie
+     * @param \Partie $partie
      */
-    public function removeIdpartie(\Partie $idpartie)
+    public function removePartie(\Partie $partie)
     {
-        $this->idpartie->removeElement($idpartie);
+        $this->partie->removeElement($partie);
     }
 
     /**
-     * Get idpartie
+     * Get partie
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getIdpartie()
+    public function getPartie()
     {
-        return $this->idpartie;
+        return $this->partie;
     }
 }
