@@ -2,51 +2,51 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Mapping as ORM;
 
 /**
  * Theme
  *
- * @ORM\Table(name="theme")
- * @ORM\Entity
+ * @Table(name="theme")
+ * @Entity
  */
 class Theme
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="id", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255, nullable=true)
+     * @Column(name="libelle", type="string", length=255, nullable=true)
      */
     private $libelle;
 
     /**
      * @var \Domaine
      *
-     * @ORM\ManyToOne(targetEntity="Domaine")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idDomaine", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Domaine")
+     * @JoinColumns({
+     *   @JoinColumn(name="domaine_id", referencedColumnName="id")
      * })
      */
-    private $iddomaine;
+    private $domaine;
 
     /**
      * @var \Theme
      *
-     * @ORM\ManyToOne(targetEntity="Theme")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idThemeParent", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Theme")
+     * @JoinColumns({
+     *   @JoinColumn(name="theme_id", referencedColumnName="id")
      * })
      */
-    private $idthemeparent;
+    private $theme;
 
 
     /**
@@ -83,48 +83,48 @@ class Theme
     }
 
     /**
-     * Set iddomaine
+     * Set domaine
      *
-     * @param \Domaine $iddomaine
+     * @param \Domaine $domaine
      * @return Theme
      */
-    public function setIddomaine(\Domaine $iddomaine = null)
+    public function setDomaine(\Domaine $domaine = null)
     {
-        $this->iddomaine = $iddomaine;
+        $this->domaine = $domaine;
     
         return $this;
     }
 
     /**
-     * Get iddomaine
+     * Get domaine
      *
      * @return \Domaine 
      */
-    public function getIddomaine()
+    public function getDomaine()
     {
-        return $this->iddomaine;
+        return $this->domaine;
     }
 
     /**
-     * Set idthemeparent
+     * Set theme
      *
-     * @param \Theme $idthemeparent
+     * @param \Theme $theme
      * @return Theme
      */
-    public function setIdthemeparent(\Theme $idthemeparent = null)
+    public function setTheme(\Theme $theme = null)
     {
-        $this->idthemeparent = $idthemeparent;
+        $this->theme = $theme;
     
         return $this;
     }
 
     /**
-     * Get idthemeparent
+     * Get theme
      *
      * @return \Theme 
      */
-    public function getIdthemeparent()
+    public function getTheme()
     {
-        return $this->idthemeparent;
+        return $this->theme;
     }
 }

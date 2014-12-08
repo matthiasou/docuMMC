@@ -2,29 +2,29 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Mapping as ORM;
 
 /**
  * Groupe
  *
- * @ORM\Table(name="groupe")
- * @ORM\Entity
+ * @Table(name="groupe")
+ * @Entity
  */
 class Groupe
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="id", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=50, nullable=true)
+     * @Column(name="libelle", type="string", length=50, nullable=true)
      */
     private $libelle;
 

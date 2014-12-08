@@ -2,48 +2,48 @@
 
 
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Mapping as ORM;
 
 /**
  * Document
  *
- * @ORM\Table(name="document")
- * @ORM\Entity
+ * @Table(name="document")
+ * @Entity
  */
 class Document
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Column(name="id", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="string", length=255, nullable=true)
+     * @Column(name="titre", type="string", length=255, nullable=true)
      */
     private $titre;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreation", type="datetime", nullable=true)
+     * @Column(name="dateCreation", type="datetime", nullable=true)
      */
     private $datecreation;
 
     /**
      * @var \Theme
      *
-     * @ORM\ManyToOne(targetEntity="Theme")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idTheme", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Theme")
+     * @JoinColumns({
+     *   @JoinColumn(name="theme_id", referencedColumnName="id")
      * })
      */
-    private $idtheme;
+    private $theme;
 
 
     /**
@@ -103,25 +103,25 @@ class Document
     }
 
     /**
-     * Set idtheme
+     * Set theme
      *
-     * @param \Theme $idtheme
+     * @param \Theme $theme
      * @return Document
      */
-    public function setIdtheme(\Theme $idtheme = null)
+    public function setTheme(\Theme $theme = null)
     {
-        $this->idtheme = $idtheme;
+        $this->theme = $theme;
     
         return $this;
     }
 
     /**
-     * Get idtheme
+     * Get theme
      *
      * @return \Theme 
      */
-    public function getIdtheme()
+    public function getTheme()
     {
-        return $this->idtheme;
+        return $this->theme;
     }
 }

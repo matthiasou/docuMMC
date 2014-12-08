@@ -1,45 +1,86 @@
 <?php
+
+
+
+use Doctrine\Mapping as ORM;
+
 /**
+ * Utilisateur
+ *
+ * @OTable(name="utilisateur")
  * @Entity
- * @Table(name="utilisateur")
  */
-class Utilisateur {
+class Utilisateur
+{
     /**
-     * @Id @Column(type="integer")
-     * @GeneratedValue
+     * @var integer
+     *
+     * @Column(name="id", type="integer", nullable=false)
+     * @Id
+     * @GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
-
     /**
-     * @Column(type="string")
      * @var string
+     *
+     * @Column(name="login", type="string", length=30, nullable=true)
      */
     private $login;
+
     /**
-     * @Column(type="string")
      * @var string
+     *
+     * @Column(name="password", type="string", length=15, nullable=true)
      */
     private $password;
+
     /**
-     * @Column(type="string")
      * @var string
+     *
+     * @Column(name="nom", type="string", length=30, nullable=true)
      */
     private $nom;
+
     /**
-     * @Column(type="string")
      * @var string
+     *
+     * @Column(name="prenom", type="string", length=30, nullable=true)
      */
     private $prenom;
+
     /**
-     * @Column(type="string")
      * @var string
+     *
+     * @Column(name="mail", type="string", length=255, nullable=true)
      */
     private $mail;
 
+    /**
+     * @var \Monde
+     *
+     * @ManyToOne(targetEntity="Monde")
+     * @JoinColumns({
+     *   @JoinColumn(name="monde_id", referencedColumnName="id")
+     * })
+     */
+    private $monde;
 
     /**
-     * @return mixed
+     * @var \Groupe
+     *
+     * @ManyToOne(targetEntity="Groupe")
+     * @JoinColumns({
+     *   @JoinColumn(name="groupe_id", referencedColumnName="id")
+     * })
+     */
+    private $groupe;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
      */
     public function getId()
     {
@@ -47,15 +88,22 @@ class Utilisateur {
     }
 
     /**
-     * @param mixed $id
+     * Set login
+     *
+     * @param string $login
+     * @return Utilisateur
      */
-    public function setId($id)
+    public function setLogin($login)
     {
-        $this->id = $id;
+        $this->login = $login;
+    
+        return $this;
     }
 
     /**
-     * @return string
+     * Get login
+     *
+     * @return string 
      */
     public function getLogin()
     {
@@ -63,49 +111,22 @@ class Utilisateur {
     }
 
     /**
-     * @param string $login
+     * Set password
+     *
+     * @param string $password
+     * @return Utilisateur
      */
-    public function setLogin($login)
+    public function setPassword($password)
     {
-        $this->login = $login;
+        $this->password = $password;
+    
+        return $this;
     }
 
     /**
-     * @return string
-     */
-    public function getMail()
-    {
-        return $this->mail;
-    }
-
-    /**
-     * @param string $mail
-     */
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
-    }
-
-
-
-    /**
-     * @return string
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * @param string $nom
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    }
-
-    /**
-     * @return string
+     * Get password
+     *
+     * @return string 
      */
     public function getPassword()
     {
@@ -113,15 +134,45 @@ class Utilisateur {
     }
 
     /**
-     * @param string $password
+     * Set nom
+     *
+     * @param string $nom
+     * @return Utilisateur
      */
-    public function setPassword($password)
+    public function setNom($nom)
     {
-        $this->password = $password;
+        $this->nom = $nom;
+    
+        return $this;
     }
 
     /**
-     * @return string
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     * @return Utilisateur
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+    
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string 
      */
     public function getPrenom()
     {
@@ -129,78 +180,71 @@ class Utilisateur {
     }
 
     /**
-     * @param string $prenom
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-    }
-
-
-    /**
-     * @var \Monde
+     * Set mail
      *
-     * @ORM\ManyToOne(targetEntity="Monde")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idMonde", referencedColumnName="id")
-     * })
-     */
-    private $idmonde;
-
-    /**
-     * @var \Groupe
-     *
-     * @ORM\ManyToOne(targetEntity="Groupe")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idGroupe", referencedColumnName="id")
-     * })
-     */
-    private $idgroupe;
-
-
-    /**
-     * Set idmonde
-     *
-     * @param \Monde $idmonde
+     * @param string $mail
      * @return Utilisateur
      */
-    public function setIdmonde(\Monde $idmonde = null)
+    public function setMail($mail)
     {
-        $this->idmonde = $idmonde;
+        $this->mail = $mail;
     
         return $this;
     }
 
     /**
-     * Get idmonde
+     * Get mail
+     *
+     * @return string 
+     */
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    /**
+     * Set monde
+     *
+     * @param \Monde $monde
+     * @return Utilisateur
+     */
+    public function setMonde(\Monde $monde = null)
+    {
+        $this->monde = $monde;
+    
+        return $this;
+    }
+
+    /**
+     * Get monde
      *
      * @return \Monde 
      */
-    public function getIdmonde()
+    public function getMonde()
     {
-        return $this->idmonde;
+        return $this->monde;
     }
 
     /**
-     * Set idgroupe
+     * Set groupe
      *
-     * @param \Groupe $idgroupe
+     * @param \Groupe $groupe
      * @return Utilisateur
      */
-    public function setIdgroupe(\Groupe $idgroupe = null)
+    public function setGroupe(\Groupe $groupe = null)
     {
-        $this->idgroupe = $idgroupe;
+        $this->groupe = $groupe;
     
         return $this;
     }
 
     /**
-     * Get idgroupe
+     * Get groupe
      *
      * @return \Groupe 
      */
-    public function getIdgroupe()
+    public function getGroupe()
     {
-        return $this->idgroupe;
+        return $this->groupe;
     }
 }
