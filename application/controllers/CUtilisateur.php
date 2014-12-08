@@ -8,19 +8,17 @@
 
 class CUtilisateur extends BaseCtrl{
 
-
-
     public function refresh($pb='') {
         if (!isset($_SESSION['user'])) {
             $this->load->view('VConnexion');
-            echo "Bienvenue " . $_SESSION['user']->getNom;
+            //echo "Bienvenue " . $this->session->userdata('user')->getNom();
+
             if ($pb == true)
                 echo 'Login ou password incorrect';
         }
         else{
-            echo "Bienvenue " . $_SESSION['user']->getNom;
+            echo "Bienvenue " . $this->session->userdata('user')->getNom();
         }
-
     }
 
 
@@ -57,51 +55,28 @@ class CUtilisateur extends BaseCtrl{
         $login = $_POST['username'];
         $password = $_POST['password'];
         $query = $this->doctrine->em->createQuery("SELECT u FROM Utilisateur u WHERE u.login='" . $login . "' AND u.password ='" . $password . "'");
-        if($joueur = $query->getResult()) {
+        if($utilisateur = $query->getSingleResult()) {
 
-            echo $joueur[0]->getLogin();
-            var_dump($joueur[0]);
+            //echo $utilisateur[0]->getLogin();
+            //$_SESSION["user"] = $utilisateur[0];
+            //$this->session->set_userdata('user', serialize($utilisateur));
+            //$this->session->userdata('user')->getNom();
+
+            var_dump($utilisateur);
+            //var_dump($_SESSION["user"]);
+            //echo $_SESSION["user"]->getGroupe()->getLibelle();
         }
         else{
             $pb = array('erreur de connexion');
             $this->refresh($pb);
         }
-        //echo $joueur->getLogin();
-
-
-
-
-
-            /*$this->load->helper(array('form', 'url'));
-
-            $this->load->library('form_validation');
-
-            $this->form_validation->set_rules('username', 'Nom d\'utilisateur', 'required');
-            $this->form_validation->set_rules('password', 'Mot de passe', 'required');
-            if ($this->form_validation->run() == FALSE)
-            {
-                $this->load->view('VIndex');
-            }
-            else
-            {
-                $this->load->view('VConnSuccess');
-            }*/
-
-            /*$query = $this->doctrine->em->createQuery("SELECT u FROM utilisateur u");
-            $users = $query->getResult();
-            $this->load->view('VIndex',array('utilisateurs'=>$users));
-
-            if ($joueur = DAO::getOne("Joueur", "login='" . $_POST["login"] . "' AND password= '" . $_POST["password"] . "'")) {
-                //var_dump($joueur);
-                $_SESSION["joueur1"] = $joueur;
-                //var_dump($joueur);
-            } else
-                echo 'Identifiants incorrects';
-
-            //echo JsUtils::doSomethingOn("#frmConnexion","hide");
-            //echo JsUtils::doSomethingOn("#inscription","hide");
-            echo JsUtils::get("CJoueur/index", "{}", "body");*/
-
     }
+
+    public function all(){
+        $query = $this->doctrine->em->createQuery("SELECT u FROM utilisateur u");
+        $users = $query->getResult();
+        $this->load->view('VUtilisateur',array('utilisateurs'=>$users));
+    }
+
 }
 ?>
