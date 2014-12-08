@@ -15,7 +15,7 @@
 
 <?php echo validation_errors(); ?>
 
-<?php //echo form_open('/CUtilisateur/connexion'); ?>
+<?php echo form_open('/CUtilisateur/connexion'); ?>
 <form id="formConnexion" class="formConnexion">
 <h5>Login</h5>
 <input type="text" name="username" value="" size="50" />
@@ -24,6 +24,7 @@
 <input type="text" name="password" value="" size="50" />
 
 <div><input type="submit" value="Submit" /></div>
+
 
 </form>
 
