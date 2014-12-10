@@ -61,7 +61,7 @@ class Version
      *   }
      * )
      */
-    private $partie;
+    private $parties;
 
     /**
      * Constructor
@@ -158,7 +158,7 @@ class Version
      */
     public function addPartie(\Partie $partie)
     {
-        $this->partie[] = $partie;
+        $this->parties[] = $partie;
     
         return $this;
     }
@@ -170,7 +170,7 @@ class Version
      */
     public function removePartie(\Partie $partie)
     {
-        $this->partie->removeElement($partie);
+        $this->parties->removeElement($partie);
     }
 
     /**
@@ -178,8 +178,8 @@ class Version
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPartie()
+    public function getParties()
     {
-        return $this->partie;
+        return $this->parties;
     }
 }

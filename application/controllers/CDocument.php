@@ -23,9 +23,9 @@ class CDocument extends BaseCtrl {
     public function getDoc(){
         //requête de selection du documents, de sa version et de ses parties
         $idDocument = 1;
-        $req = "SELECT id FROM version WHERE document_id = " . $idDocument . "";
-        $imbrique = "SELECT partie_id FROM partieversion WHERE version_id= " . $req . "";
-        $query = $this->doctrine->em->createQuery("SELECT d,v, p FROM Document d, Version v, partie p WHERE d.id='1' AND v.document=d.id AND p.id= " . $imbrique ."");
+        //$req = "SELECT id FROM version WHERE document_id = " . $idDocument . "";
+        //$imbrique = "SELECT partie_id FROM partieversion WHERE version_id= " . $req . "";
+        $query = $this->doctrine->em->createQuery("SELECT p FROM Document d, Version v, partie p JOIN v.document, p.version WHERE d.id=" . $idDocument . "");
         if($doc = $query->getResult()) {
             $i = 0;
             foreach ($doc as $data){
