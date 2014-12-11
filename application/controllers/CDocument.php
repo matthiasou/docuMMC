@@ -11,11 +11,10 @@ class CDocument extends BaseCtrl {
 
 
     public function affichDoc(){
-        $document = $this->getDoc();
-        $doc = $document[0];
-        $version = $document[1];
-        $partie = $document[2];
-        $this->load->view('VDocument', array('document' => $doc, 'version' => $version, 'partie' => $partie));
+        $doc = $this->getDoc();
+        //var_dump($document->getParties());
+
+        $this->load->view('VDocument', array('doc' => $doc));
     }
 
 
@@ -25,16 +24,10 @@ class CDocument extends BaseCtrl {
         $idDocument = 1;
         //$req = "SELECT id FROM version WHERE document_id = " . $idDocument . "";
         //$imbrique = "SELECT partie_id FROM partieversion WHERE version_id= " . $req . "";
-        $query = $this->doctrine->em->createQuery("SELECT p FROM Document d, Version v, partie p JOIN v.document, p.version WHERE d.id=" . $idDocument . "");
-        if($doc = $query->getResult()) {
-            $i = 0;
-            foreach ($doc as $data){
-                echo "</br>" . $data->getId() . " i = ";
-                echo $i;
-                $i++;
-            }
-            //return $doc;
-
+        $query = $this->doctrine->em->createQuery("SELECT v FROM Version v JOIN v.document d WHERE d.id=" . $idDocument . " ORDER BY v.datemaj");
+        if($doc = $query->getSingleResult()) {
+            //var_dump($doc->getParties());
+            return $doc;
 
         }
         else{

@@ -29,8 +29,8 @@
 //$docu = $doc[2]->getId();
 
 
-foreach($document as $data){
-    var_dump($data);
+foreach($doc as $data){
+    //var_dump($data);
 }
 ?>
 
@@ -49,17 +49,17 @@ foreach($document as $data){
     <tr>
         <td>
             <?php
-            echo $document->getId();
+            echo $doc->getDocument()->getId();
             ?>
         </td>
         <td>
             <?php
-            echo $document->getTitre();
+                echo $doc->getDocument()->getTitre();
             ?>
         </td>
         <td>
             <?php
-            echo $document->getDateCreation()->format('Y-m-d H:i:s');
+            echo $doc->getDocument()->getDateCreation()->format('Y-m-d H:i:s');
             ?>
         </td>
     </tr>
@@ -70,7 +70,19 @@ foreach($document as $data){
 
 <span id="spanDocument">
     <?php
-    echo $document->getDateCreation()->format('Y-m-d H:i:s');
+    //var_dump($doc->getDocument()->getTitre());
+
+
+    foreach ($doc->getDocument() as $docu) {
+        //var_dump($docu);
+        //echo $docu->getId();
+    }
+
+    foreach ($doc->getParties() as $partie){
+        echo $partie->getTitre() . "</br>";
+        echo $partie->getContenu();
+    }
+    //echo $doc->getDateCreation()->format('Y-m-d H:i:s');
     ?>
 
 </span>
