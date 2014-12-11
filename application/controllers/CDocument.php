@@ -24,8 +24,9 @@ class CDocument extends BaseCtrl {
         $idDocument = 1;
         //$req = "SELECT id FROM version WHERE document_id = " . $idDocument . "";
         //$imbrique = "SELECT partie_id FROM partieversion WHERE version_id= " . $req . "";
-        $query = $this->doctrine->em->createQuery("SELECT v FROM Version v JOIN v.document d WHERE d.id=" . $idDocument . " ORDER BY v.datemaj");
-        if($doc = $query->getSingleResult()) {
+        $query = $this->doctrine->em->createQuery("SELECT v FROM Version v JOIN v.document d WHERE d.id=" . $idDocument . " ORDER BY v.datemaj ");
+        $query->setMaxResults(1);
+        if($doc = $query->getResult()[0]) {
             //var_dump($doc->getParties());
             return $doc;
 

@@ -29,9 +29,7 @@
 //$docu = $doc[2]->getId();
 
 
-foreach($doc as $data){
-    //var_dump($data);
-}
+
 ?>
 
 <table border="1" align="center">
