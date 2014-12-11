@@ -27,7 +27,7 @@ class CDocument extends BaseCtrl {
         $query = $this->doctrine->em->createQuery("SELECT v FROM Version v JOIN v.document d WHERE d.id=" . $idDocument . " ORDER BY v.datemaj ");
         $query->setMaxResults(1);
         if($doc = $query->getResult()[0]) {
-            //var_dump($doc->getParties());
+            var_dump($doc->getParties());
             return $doc;
 
         }
