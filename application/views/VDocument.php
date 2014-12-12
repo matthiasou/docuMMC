@@ -6,58 +6,34 @@
  * Time: 15:01
  */
 
-// **** Liste des ressources :
-/**
- * Liste des ressources :
- * $doc = tanleau associatif contenant :
- *
- * * titreDoc = titre du document
- * * dateCrea = date de création du document
- *
- * * dateVersion = date de la création de la version
- *
- * * titreP = titre de la partie
- * * contenuP = contenu de la partie
- * * ordreP = placement dans le document
- * * niveauP = niveau de tabulation
- *
- *  DEV :
- * * idDoc = id du document
- * * idV = id de la version
- * * idP = id de la partie
- */
-//$docu = $doc[2]->getId();
-
-
-
 ?>
 
 <table border="1" align="center">
     <tr>
         <th>
-            idDoc
+            ID du document
         </th>
         <th>
             Titre du document
         </th>
         <th>
-            Date de création
+            Date de création du document
         </th>
     </tr>
     <tr>
         <td>
             <?php
-            echo $doc->getDocument()->getId();
+            echo $doc[0]->getDocument()->getId();
             ?>
         </td>
         <td>
             <?php
-                echo $doc->getDocument()->getTitre();
+                echo $doc[0]->getDocument()->getTitre();
             ?>
         </td>
         <td>
             <?php
-            echo $doc->getDocument()->getDateCreation()->format('Y-m-d H:i:s');
+            echo $doc[0]->getDocument()->getDateCreation()->format('Y-m-d H:i:s');
             ?>
         </td>
     </tr>
@@ -66,21 +42,18 @@
     ?>
 </table>
 
-<span id="spanDocument">
+<div id="divParties" class="divParties">
     <?php
-    //var_dump($doc->getDocument()->getTitre());
+    //***** Affichage des parties les unes à la suite des autres
+    foreach ($doc as $docu) {
 
 
-    foreach ($doc->getDocument() as $docu) {
-        //var_dump($docu);
-        //echo $docu->getId();
+        foreach ($docu->getParties() as $partie) {
+            echo "<fieldset id='divdoc". $partie->getNiveau() ."' class='divdoc". $partie->getNiveau() ."'>";
+            echo "<legend>" . $partie->getTitre() . "<input type='button' id='btnEdit' class='btnEdit' /></legend>";
+            echo "" . $partie->getContenu() . "";
+            echo "</fieldset>";
+        }
     }
-
-    foreach ($doc->getParties() as $partie){
-        echo $partie->getTitre() . "</br>";
-        echo $partie->getContenu();
-    }
-    //echo $doc->getDateCreation()->format('Y-m-d H:i:s');
     ?>
-
-</span>
+</div>
