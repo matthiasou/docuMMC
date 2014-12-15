@@ -7,8 +7,24 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
-.divParties{
-    padding-left: 10%;
+#titDoc{
+    margin-top: 1%;
+    font-size: xx-large;
+    text-align: center;
+}
+#dateCrea{
+    text-align: center;
+    font-style: italic;
+}
+#divSommaire{
+    border: 1px solid;
+    padding: 5px;
+    margin-top: 1%;
+}
+#divParties{
+    border: 1px solid;
+    padding: 5px;
+    margin-top: 1%;
 }
 
 .divdoc1{
