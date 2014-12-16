@@ -20,17 +20,20 @@
 
 
 <div id="divSommaire" class="span6">
-    <?php
-    //***** Sommaire affichant le titre de chaque parties les unes à la suite des autres
-    echo "<fieldset>";
-    echo "<legend>Sommaire : </legend>";
-        foreach ($doc as $docu) {
-            foreach ($docu->getParties() as $partie) {
-                echo "<span><a href='#divdoc". $partie->getNiveau() ."'>" . $partie->getTitre() . "</a>";
+    <ul>
+        <?php
+        //***** Sommaire affichant le titre de chaque parties les unes à la suite des autres
+        echo "<fieldset>";
+        echo "<legend>Sommaire : </legend>";
+            foreach ($doc as $docu) {
+                foreach ($docu->getParties() as $partie) {
+                    echo "<li><a href='#divdoc". $partie->getNiveau() ."'>" . $partie->getTitre() . "</a></li>";
+                }
             }
-        }
-    echo "</fieldset>";
-    ?>
+        echo "</fieldset>";
+        ?>
+
+    </ul>
 </div>
 
 
