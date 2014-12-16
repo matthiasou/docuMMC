@@ -7,11 +7,8 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
-#titDoLKJLKSc{
-    margin-top: 1%;
-    font-size: xx-large;
-    text-align: center;
-}
+
+
 #titDoc{
     margin-top: 1%;
     font-size: xx-large;
@@ -57,7 +54,7 @@
 }
 
 .btnEdit {
-    background: url('../../assets/images/icons/32x32/big46.png');
+    background: url(' <?php echo base_url(); ?> assets/images/icons/32x32/big46.png');
     background-position:center;
     background-repeat:no-repeat;
     padding-left: 15px;
