@@ -57,7 +57,7 @@
 }
 
 .btnEdit {
-    background: url('../docu/assets/images/icons/32x32/big46.png');
+    background: url('../../assets/images/icons/32x32/big46.png');
     background-position:center;
     background-repeat:no-repeat;
     padding-left: 15px;
