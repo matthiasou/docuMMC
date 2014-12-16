@@ -72,11 +72,7 @@ class CUtilisateur extends BaseCtrl{
         }
     }
 
-    public function all(){
-        $query = $this->doctrine->em->createQuery("SELECT u FROM utilisateur u");
-        $users = $query->getResult();
-        $this->load->view('VUtilisateur',array('utilisateurs'=>$users));
-    }
+
 
 }
 ?>
