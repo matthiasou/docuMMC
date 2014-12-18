@@ -13,6 +13,7 @@ class CAdmin extends BaseCtrl{
      */
     public function index(){
         $this->refresh();
+
     }
 
     /**
@@ -20,7 +21,6 @@ class CAdmin extends BaseCtrl{
      */
     public function refresh(){
         ob_start();
-
         $this->jsutils->getAndBindTo(".delete", "click", "/docu/CAdmin/deleteUser", "body");
         $this->jsutils->getAndBindTo(".addUser", "click", "/docu/CAdmin/viewAddUser", "#addUser");
         $this->jsutils->getAndBindTo(".addMonde", "click", "/docu/CAdmin/viewAddMonde", "#addMonde");
@@ -34,6 +34,7 @@ class CAdmin extends BaseCtrl{
         $query2 = $this->doctrine->em->createQuery("SELECT m FROM Monde m");
         $mondes =$query2->getResult();
         $this->load->view('VAdmin',array('utilisateurs'=>$users,'mondes'=>$mondes));
+
 
     }
 

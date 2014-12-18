@@ -74,6 +74,7 @@
  * @property CI_Security $security                Security Class, xss, csrf, etc...
  * @property CI_JsUtils $jsutils
  * @property Doctrine $doctrine
+ * @property ModelUtils $modelutils
  */
 class CI_Controller{}
 
@@ -121,5 +122,6 @@ class CI_Controller{}
  * @property CI_Security $security                Security Class, xss, csrf, etc...
  * @property CI_JsUtils $jsutils
  * @property Doctrine $doctrine
+ * @property ModelUtils $modelutils
  */
 class CI_Model{}
