@@ -53,12 +53,12 @@
     padding-left: 25%;
 }
 
-.btnEdit {
-    background: url(' <?php echo base_url(); ?> assets/images/icons/32x32/big46.png');
+.btnEdit {  
     background-position:center;
     background-repeat:no-repeat;
-    padding-left: 15px;
     float: right;
+    border:1px solid;
+    border-radius:10%;
 
 }
 

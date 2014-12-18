@@ -43,7 +43,7 @@
     foreach ($doc as $docu) {
         foreach ($docu->getParties() as $partie) {
             echo "<fieldset id='divdoc". $partie->getNiveau() ."' class='divdoc". $partie->getNiveau() ."'>";
-            echo "<legend>" . $partie->getTitre() . "<input type='button' id='btnEdit' class='btnEdit' /></legend>";
+            echo "<legend>" . $partie->getTitre() . "<a href='#' id='btnEdit' class='btnEdit'><img src=' " . base_url() . "assets/images/icons/32x32/big46.png'></a></legend>";
             echo "" . $partie->getContenu() . "";
             echo "</fieldset>";
         }
