@@ -29,10 +29,10 @@ class CAdmin extends BaseCtrl{
         $this->jsutils->getAndBindTo(".modifierMonde", "click", "/docu/CAdmin/viewUpdateMonde", "#updateMonde");
         $this->jsutils->compile();
 
-        $query = $this->doctrine->em->createQuery("SELECT u FROM Utilisateur u");
-        $users = $query->getResult();
-        $query2 = $this->doctrine->em->createQuery("SELECT m FROM Monde m");
-        $mondes =$query2->getResult();
+
+        $users = $this->modelutils->getAllUsers();
+        $mondes = $this->modelutils->getAllMondes();
+
         $this->load->view('VAdmin',array('utilisateurs'=>$users,'mondes'=>$mondes));
 
 
@@ -44,8 +44,7 @@ class CAdmin extends BaseCtrl{
      */
     public function deleteUser($param){
         $id=str_replace("delete", "", $param);
-        $query = $this->doctrine->em->createQuery("SELECT u FROM Utilisateur u WHERE u.id=".$id);
-        $user = $query->getSingleResult();
+        $user = $this->modelutils->getUserWithId($id);
         $this->doctrine->em->remove($user);
         $this->doctrine->em->flush();
         $this->refresh();
@@ -60,12 +59,9 @@ class CAdmin extends BaseCtrl{
         $this->jsutils->postFormAndBindTo(".btUpdateUser", "click", "/docu/CAdmin/updateUser","frmUpdateUser","#messageUpdateUser");
         $this->jsutils->compile();
         $id=str_replace("modifier", "", $param);
-        $query = $this->doctrine->em->createQuery("SELECT u FROM Utilisateur u WHERE u.id=".$id);
-        $user = $query->getSingleResult();
-        $query = $this->doctrine->em->createQuery("SELECT m FROM Monde m");
-        $mondes = $query->getResult();
-        $query = $this->doctrine->em->createQuery("SELECT g FROM Groupe g");
-        $groupes = $query->getResult();
+        $user = $this->modelutils->getUserWithId($id);
+        $mondes = $this->modelutils->getAllMondes();
+        $groupes = $this->modelutils->getAllGroupes();
        // var_dump($user);
         $this->load->view('VUpdateUser',array('utilisateurs'=>$user,'monde' => $mondes, 'groupe' => $groupes));
 
@@ -77,12 +73,9 @@ class CAdmin extends BaseCtrl{
      */
     public function updateUser($param){
         $id = str_replace("btUpdateUser","",$param);
-        $query = $this->doctrine->em->createQuery("SELECT u FROM Utilisateur u WHERE u.id=".$id);
-        $query1 = $this->doctrine->em->createQuery("SELECT m FROM Monde m WHERE m.id=".$_POST["monde_id"]);
-        $query2 = $this->doctrine->em->createQuery("SELECT g FROM Groupe g WHERE g.id=".$_POST["groupe_id"]);
-        $utilisateur = $query->getSingleResult();
-        $monde = $query1->getSingleResult();
-        $groupe = $query2->getSingleResult();
+        $utilisateur = $this->modelutils->getUserWithId($id);
+        $monde = $this->modelutils->getMondeWithId($_POST["monde_id"]);
+        $groupe = $this->modelutils->getGroupeWithId($_POST["groupe_id"]);
         $utilisateur->setPrenom($_POST['prenom']);
         $utilisateur->setNom($_POST['nom']);
         $utilisateur->setMail($_POST['mail']);
@@ -107,10 +100,8 @@ class CAdmin extends BaseCtrl{
         $this->jsutils->postFormAndBindTo("#btUser", "click", "/docu/CAdmin/addUser","frmAddUser","#message");
         $this->jsutils->click("#btFermer",$this->jsutils->hide("#frmAddUser"));
         $this->jsutils->compile();
-        $query = $this->doctrine->em->createQuery("SELECT m FROM Monde m");
-        $mondes = $query->getResult();
-        $query = $this->doctrine->em->createQuery("SELECT g FROM Groupe g");
-        $groupes = $query->getResult();
+        $mondes = $this->modelutils->getAllMondes();
+        $groupes = $this->modelutils->getAllGroupes();
         $this->load->view('VAddUser', array("monde" => $mondes, "groupe" => $groupes));
 
     }
@@ -121,10 +112,8 @@ class CAdmin extends BaseCtrl{
      */
     public  function  addUser(){
 
-        $query = $this->doctrine->em->createQuery("SELECT m FROM Monde m WHERE m.id=".$_POST["monde_id"]);
-        $query2 = $this->doctrine->em->createQuery("SELECT g FROM Groupe g WHERE g.id=".$_POST["groupe_id"]);
-        $monde = $query->getSingleResult();
-        $groupe = $query2->getSingleResult();
+        $monde = $this->modelutils->getMondeWithId($_POST["monde_id"]);
+        $groupe = $this->modelutils->getGroupeWithId($_POST["groupe_id"]);
         $utilisateur = new utilisateur();
         $utilisateur->setPrenom($_POST['prenom']);
         $utilisateur->setNom($_POST['nom']);
@@ -147,8 +136,7 @@ class CAdmin extends BaseCtrl{
     public function deleteMonde($param){
 
         $id=str_replace("deleteMonde", "", $param);
-        $query = $this->doctrine->em->createQuery("SELECT m FROM Monde m WHERE m.id=".$id);
-        $monde = $query->getSingleResult();
+        $monde = $this->modelutils->getMondeWithId($id);
         $this->doctrine->em->remove($monde);
         $this->doctrine->em->flush();
         $this->refresh();
@@ -164,8 +152,7 @@ class CAdmin extends BaseCtrl{
         $this->jsutils->postFormAndBindTo(".btUpdateMonde", "click", "/docu/CAdmin/updateMonde","frmUpdateMonde","body");
         $this->jsutils->compile();
         $id=str_replace("modifierMonde", "", $param);
-        $query = $this->doctrine->em->createQuery("SELECT m FROM Monde m WHERE m.id=".$id);
-        $monde = $query->getSingleResult();
+        $monde = $this->modelutils->getMondeWithId($id);
 
         $this->load->view('VUpdateMonde',array('mondes'=>$monde));
 
@@ -179,8 +166,7 @@ class CAdmin extends BaseCtrl{
      */
     public function updateMonde($param){
         $id = str_replace("btUpdateMonde","",$param);
-        $query = $this->doctrine->em->createQuery("SELECT m FROM Monde m WHERE m.id=".$id);
-        $monde = $query->getSingleResult();
+        $monde = $this->modelutils->getMondeWithId($id);
         $monde->setLibelle($_POST['libelle']);
         $this->doctrine->em->persist($monde);
         $this->doctrine->em->flush($monde);

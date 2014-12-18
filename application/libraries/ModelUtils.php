@@ -37,6 +37,16 @@ class ModelUtils{
         return $query->getSingleResult();
     }
 
+    public function getAllGroupes(){
+        $query = $this->ci->doctrine->em->createQuery("SELECT g FROM Groupe g");
+        return $query->getResult();
+    }
+
+    public function getAllDomaines(){
+        $query = $this->ci->doctrine->em->createQuery("SELECT d FROM Domaine d");
+        return $query->getResult();
+    }
+
     public function getGroupeWithId($param){
         $query = $this->ci->doctrine->em->createQuery("SELECT g FROM Groupe g WHERE g.id='".$param."'");
         return $query->getSingleResult();
