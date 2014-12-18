@@ -52,7 +52,17 @@
 .divdoc6{
     padding-left: 25%;
 }
-
+.flecheSlide{
+    width: 10px;
+    transition: all 1s;
+}
+.rotated {
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -moz-transform: rotate(90deg); /* Firefox */
+    -webkit-transform: rotate(90deg); /* Safari and Chrome */
+    -o-transform: rotate(90deg); /* Opera */
+}
 .btnEdit {  
     background-position:center;
     background-repeat:no-repeat;
@@ -60,6 +70,16 @@
     border:1px solid;
     border-radius:10%;
 
+}
+.back-to-top {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    display: none;
+}
+
+.back-to-top:hover {
+    background-color: rgba(135, 135, 135, 0.50);
 }
 
 
